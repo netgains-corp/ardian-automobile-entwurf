@@ -8,7 +8,8 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23111111'/%3E%3Ctext x='50' y='68' font-size='60' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
 
     <!-- 1. LCP OPTIMIERUNG: Preload des Haupt-Hintergrundbildes mit hoher Priorität -->
-    <link rel="preload" href="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=75&w=1200&auto=format&fit=crop" as="image" fetchpriority="high">
+    <link rel="preload" href="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=70&w=800&auto=format&fit=crop" as="image" fetchpriority="high" media="(max-width: 639px)">
+    <link rel="preload" href="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=75&w=1200&auto=format&fit=crop" as="image" fetchpriority="high" media="(min-width: 640px)">
 
     <!-- 2. FONTS: Preload & Display Swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,11 +29,16 @@
         #bg-image {
             position: fixed;
             inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=75&w=1200&auto=format&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=70&w=800&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             z-index: -2;
             filter: brightness(1.1) saturate(0);
+        }
+        @media (min-width: 640px) {
+            #bg-image {
+                background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=75&w=1200&auto=format&fit=crop');
+            }
         }
 
         .bg-overlay {
@@ -300,16 +306,16 @@
                     <h2 class="text-center font-header font-bold text-2xl text-black dark:text-white mb-6 uppercase italic">Fahrzeuge</h2>
                     <div class="grid grid-cols-2 gap-2">
                         <div class="relative overflow-hidden">
-                            <img src="https://placehold.co/400x300/111111/1a6aff?text=Limousine" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Limousine" class="grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23111111'/><text x='50%25' y='50%25' font-size='36' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle' dominant-baseline='middle'>Limousine</text></svg>" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Limousine" class="grayscale hover:grayscale-0 transition-all duration-500">
                         </div>
                         <div class="relative overflow-hidden">
-                            <img src="https://placehold.co/400x300/111111/1a6aff?text=SUV" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="SUV" class="grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23111111'/><text x='50%25' y='50%25' font-size='36' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle' dominant-baseline='middle'>SUV</text></svg>" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="SUV" class="grayscale hover:grayscale-0 transition-all duration-500">
                         </div>
                         <div class="relative overflow-hidden">
-                            <img src="https://placehold.co/400x300/111111/1a6aff?text=Kombi" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Kombi" class="grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23111111'/><text x='50%25' y='50%25' font-size='36' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle' dominant-baseline='middle'>Kombi</text></svg>" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Kombi" class="grayscale hover:grayscale-0 transition-all duration-500">
                         </div>
                         <div class="relative overflow-hidden">
-                            <img src="https://placehold.co/400x300/111111/1a6aff?text=Sportwagen" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Sportwagen" class="grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23111111'/><text x='50%25' y='50%25' font-size='36' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle' dominant-baseline='middle'>Sportwagen</text></svg>" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Sportwagen" class="grayscale hover:grayscale-0 transition-all duration-500">
                         </div>
                     </div>
                 </section>
@@ -326,7 +332,7 @@
                     </div>
 
                     <a href="https://www.google.com/maps/search/?api=1&query=Oberstra%C3%9Fe+26+55481+Kirchberg+Hunsr%C3%BCck" target="_blank" rel="noopener" class="block relative overflow-hidden border border-gray-300 dark:border-gray-800" aria-label="Route in Google Maps öffnen">
-                        <img src="https://placehold.co/800x400/111111/333333?text=Standort+Kirchberg" width="800" height="400" loading="lazy" decoding="async" style="aspect-ratio: 800 / 400; width: 100%; height: auto;" alt="Karte Standort Kirchberg" class="opacity-60">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'><rect width='800' height='400' fill='%23111111'/><text x='50%25' y='50%25' font-size='48' font-family='Arial,sans-serif' font-weight='bold' fill='%23333333' text-anchor='middle' dominant-baseline='middle'>Standort Kirchberg</text></svg>" width="800" height="400" loading="lazy" decoding="async" style="aspect-ratio: 800 / 400; width: 100%; height: auto;" alt="Karte Standort Kirchberg" class="opacity-60">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <span class="bg-brand-red text-white px-6 py-2 font-bold uppercase text-xs tracking-widest transform -skew-x-12">Route starten</span>
                         </div>
