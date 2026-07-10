@@ -194,10 +194,22 @@
         ::-webkit-scrollbar-track { background: #e5e5e5; }
         ::-webkit-scrollbar-thumb { background: #1a6aff; }
 
-        .mobile-de-btn { border-color: #000; }
+        .mobile-de-btn { border-color: #000; position: relative; }
         .mobile-de-btn:hover { background: #000; color: #fff; }
+        .mobile-de-btn::after {
+            content: "";
+            position: absolute;
+            left: 8px; top: calc(100% - 8px);
+            width: 22.63px; height: 2px;
+            background: #000;
+            transform: translate(-50%, -50%) rotate(45deg);
+            pointer-events: none;
+        }
+        .mobile-de-btn:hover::after { background: #fff; }
         html.dark .mobile-de-btn { border-color: #fff; }
         html.dark .mobile-de-btn:hover { background: #fff; color: #000; }
+        html.dark .mobile-de-btn::after { background: #fff; }
+        html.dark .mobile-de-btn:hover::after { background: #000; }
     </style>
 </head>
 <body class="text-gray-800 dark:text-gray-200 2xl:text-xl">
