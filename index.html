@@ -1056,7 +1056,35 @@
 
     .footer-link:hover {
         opacity: 1;
-    }/* Instagram-Button unten links – im Instagram-Farbverlauf, damit klar sichtbar */
+    }
+
+    .legal-overlay {
+        position: fixed; inset: 0; z-index: 100;
+        background: rgba(0,0,0,.7);
+        display: flex; align-items: center; justify-content: center;
+        padding: 20px;
+    }
+    .legal-modal {
+        position: relative;
+        background: #fff; color: #111;
+        max-width: 560px; width: 100%; max-height: 82vh;
+        overflow-y: auto;
+        border-radius: 8px;
+        padding: 32px 24px 24px;
+        font-family: 'Chakra Petch', sans-serif;
+        font-size: .82rem; line-height: 1.6;
+    }
+    html.dark .legal-modal { background: #111; color: #eee; }
+    .legal-title { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; font-style: italic; font-size: 1.3rem; margin-bottom: 16px; }
+    .legal-content p { margin-bottom: 12px; }
+    .legal-content a { color: #1a6aff; }
+    .legal-close {
+        position: absolute; top: 10px; right: 14px;
+        background: transparent; border: none; cursor: pointer;
+        font-size: 1.6rem; line-height: 1; color: inherit; opacity: .6;
+    }
+    .legal-close:hover { opacity: 1; }
+    /* Instagram-Button unten links – im Instagram-Farbverlauf, damit klar sichtbar */
 
     .instagram-btn {
         display: inline-flex;
@@ -1384,25 +1412,6 @@
                     </div>
                 </section>
 
-                <!-- 7. GALERIE / FAHRZEUGE -->
-                <section class="service-card p-6 reveal">
-                    <h2 class="text-center font-header font-bold text-2xl text-black dark:text-white mb-6 uppercase italic">Fahrzeuge</h2>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="relative overflow-hidden">
-                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23111111'/><text x='50%25' y='50%25' font-size='36' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle' dominant-baseline='middle'>Limousine</text></svg>" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Limousine" class="grayscale hover:grayscale-0 transition-all duration-500">
-                        </div>
-                        <div class="relative overflow-hidden">
-                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23111111'/><text x='50%25' y='50%25' font-size='36' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle' dominant-baseline='middle'>SUV</text></svg>" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="SUV" class="grayscale hover:grayscale-0 transition-all duration-500">
-                        </div>
-                        <div class="relative overflow-hidden">
-                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23111111'/><text x='50%25' y='50%25' font-size='36' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle' dominant-baseline='middle'>Kombi</text></svg>" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Kombi" class="grayscale hover:grayscale-0 transition-all duration-500">
-                        </div>
-                        <div class="relative overflow-hidden">
-                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23111111'/><text x='50%25' y='50%25' font-size='36' font-family='Arial,sans-serif' font-weight='bold' fill='%231a6aff' text-anchor='middle' dominant-baseline='middle'>Sportwagen</text></svg>" width="400" height="300" loading="lazy" decoding="async" style="aspect-ratio: 400 / 300; width: 100%; height: auto;" alt="Sportwagen" class="grayscale hover:grayscale-0 transition-all duration-500">
-                        </div>
-                    </div>
-                </section>
-
                 <!-- 8. ANFAHRT & ÖFFNUNGSZEITEN -->
                 <section class="service-card p-6 pb-8 reveal">
                     <h2 class="font-header font-bold text-2xl text-black dark:text-white mb-4 uppercase italic text-center">Anfahrt &amp; Zeiten</h2>
@@ -1450,11 +1459,74 @@
                             <span class="dark:hidden">Dark Mode</span>
                             <span class="hidden dark:inline">Light Mode</span>
                         </button>
-                        <a href="impressum.html" class="footer-link">Impressum</a>
-                        <a href="datenschutz.html" class="footer-link">Datenschutz</a>
+                        <button type="button" onclick="openLegalModal('impressum')" class="footer-link">Impressum</button>
+                        <button type="button" onclick="openLegalModal('datenschutz')" class="footer-link">Datenschutz</button>
                     </div>
                 </footer>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- RECHTLICHES: Impressum & Datenschutz als Popup -->
+    <div id="legal-overlay" class="legal-overlay" hidden>
+        <div class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+            <button type="button" class="legal-close" onclick="closeLegalModal()" aria-label="Schließen">&times;</button>
+            <div id="legal-content-impressum" class="legal-content" hidden>
+                <h2 id="legal-modal-title-impressum" class="legal-title">Impressum</h2>
+                <p><strong>Angaben gemäß § 5 TMG</strong></p>
+                <p>
+                    Ardian Automobile<br>
+                    Inhaber: Ardian Berisha<br>
+                    Einzelunternehmen<br>
+                    Oberstraße 26<br>
+                    55481 Kirchberg (Hunsrück)
+                </p>
+                <p><strong>Kontakt</strong></p>
+                <p>
+                    Telefon: 0176 64468798
+                </p>
+                <p><strong>Umsatzsteuer</strong></p>
+                <p>Sofern keine Umsatzsteuer-Identifikationsnummer ausgewiesen ist, erfolgt die Rechnungsstellung nach § 19 UStG (Kleinunternehmerregelung) bzw. ist diese auf Anfrage erhältlich.</p>
+                <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</strong></p>
+                <p>Ardian Berisha, Oberstraße 26, 55481 Kirchberg (Hunsrück)</p>
+                <p><strong>EU-Streitschlichtung</strong></p>
+                <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a>. Wir nehmen an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle nicht teil (siehe unten).</p>
+                <p><strong>Verbraucherstreitbeilegung/Universalschlichtungsstelle</strong></p>
+                <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+                <p><strong>Haftung für Inhalte</strong></p>
+                <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+                <p><strong>Haftung für Links</strong></p>
+                <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+                <p><strong>Urheberrecht</strong></p>
+                <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+            </div>
+            <div id="legal-content-datenschutz" class="legal-content" hidden>
+                <h2 id="legal-modal-title-datenschutz" class="legal-title">Datenschutzerklärung</h2>
+                <p><strong>1. Verantwortlicher</strong></p>
+                <p>
+                    Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:<br>
+                    Ardian Berisha (Ardian Automobile)<br>
+                    Oberstraße 26<br>
+                    55481 Kirchberg (Hunsrück)<br>
+                    Telefon: 0176 64468798
+                </p>
+                <p><strong>2. Allgemeines zur Datenverarbeitung</strong></p>
+                <p>Wir verarbeiten personenbezogene Daten unserer Nutzer grundsätzlich nur, soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer Inhalte und Leistungen erforderlich ist. Die Verarbeitung personenbezogener Daten erfolgt regelmäßig nur nach Einwilligung des Nutzers oder auf Grundlage einer gesetzlichen Erlaubnis (Art. 6 Abs. 1 DSGVO).</p>
+                <p><strong>3. Hosting und Server-Logfiles</strong></p>
+                <p>Diese Website wird bei einem externen Hosting-Anbieter (Hoster) gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Beim Aufruf unserer Website erfasst der Hoster automatisch Informationen in sogenannten Server-Logfiles, die Ihr Browser automatisch übermittelt (z. B. IP-Adresse, Datum und Uhrzeit der Anfrage, Browsertyp, verwendetes Betriebssystem, Referrer-URL). Diese Daten werden ausschließlich zur Gewährleistung eines störungsfreien Betriebs sowie zur Verbesserung unseres Angebots verarbeitet (Art. 6 Abs. 1 lit. f DSGVO) und nicht mit anderen Datenquellen zusammengeführt.</p>
+                <p><strong>4. Kontaktaufnahme</strong></p>
+                <p>Wenn Sie per Telefon, E-Mail oder über ein Kontaktformular mit uns in Kontakt treten, werden Ihre Angaben (z. B. Name, Kontaktdaten, Nachrichteninhalt) zum Zweck der Bearbeitung Ihrer Anfrage sowie für den Fall etwaiger Anschlussfragen bei uns gespeichert und verarbeitet (Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO). Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+                <p><strong>5. Cookies</strong></p>
+                <p>Diese Website verwendet, soweit technisch erforderlich, Cookies bzw. lokale Speichertechnologien (z. B. zur Speicherung Ihrer Darstellungspräferenz wie „Dark Mode"). Diese sind für den Betrieb der Website notwendig (Art. 6 Abs. 1 lit. f DSGVO) und können in den Einstellungen Ihres Browsers jederzeit gelöscht werden.</p>
+                <p><strong>6. Externe Inhalte (Instagram, Google Maps)</strong></p>
+                <p>Auf dieser Website befinden sich Links zu externen Diensten wie Instagram und Google Maps. Beim Anklicken dieser Links verlassen Sie unsere Website; für die Datenverarbeitung durch diese Drittanbieter sind ausschließlich deren jeweilige Datenschutzhinweise maßgeblich.</p>
+                <p><strong>7. Ihre Rechte</strong></p>
+                <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung Ihrer personenbezogenen Daten. Wenden Sie sich hierzu an die oben genannte Kontaktadresse.</p>
+                <p><strong>8. Beschwerderecht bei einer Aufsichtsbehörde</strong></p>
+                <p>Ihnen steht zudem ein Beschwerderecht bei der zuständigen Datenschutzaufsichtsbehörde zu, z. B. dem Landesbeauftragten für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz.</p>
+                <p><strong>9. Aktualität und Änderung dieser Datenschutzerklärung</strong></p>
+                <p>Diese Datenschutzerklärung ist aktuell gültig. Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher Vorgaben kann es notwendig werden, diese Erklärung zu ändern.</p>
             </div>
         </div>
     </div>
@@ -1475,6 +1547,26 @@
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.theme = isDark ? 'dark' : 'light';
         };
+
+        // Impressum / Datenschutz als Popup
+        const legalOverlay = document.getElementById('legal-overlay');
+        window.openLegalModal = function(which) {
+            document.querySelectorAll('.legal-content').forEach(el => el.hidden = true);
+            const target = document.getElementById('legal-content-' + which);
+            if (target) target.hidden = false;
+            legalOverlay.hidden = false;
+            document.body.style.overflow = 'hidden';
+        };
+        window.closeLegalModal = function() {
+            legalOverlay.hidden = true;
+            document.body.style.overflow = '';
+        };
+        legalOverlay.addEventListener('click', (e) => {
+            if (e.target === legalOverlay) closeLegalModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !legalOverlay.hidden) closeLegalModal();
+        });
 
         // Live Öffnungsstatus (0=So ... 6=Sa)
         (function() {
